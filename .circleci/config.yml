@@ -28,6 +28,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependencies-
       - run: yarn build
+      - run: yarn start
+      - run: yarn e2e
 workflows:
   version: 2
   build-and-test:
