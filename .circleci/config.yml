@@ -28,8 +28,19 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependencies-
       - run: yarn build
-      - run: yarn start
+  e2e:
+    docker:
+      - image: circleci/node:dubnium-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}-{{ .Environment.CACHE_VERSION }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-
       - run: yarn e2e
+  
 workflows:
   version: 2
   build-and-test:
@@ -38,3 +49,6 @@ workflows:
       - build:
           requires:
             - install
+      - e2e:
+          requires:
+            - build
