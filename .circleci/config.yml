@@ -28,7 +28,6 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependencies-
       - run: yarn build
-      - run: npx netlify-cli deploy --prod --site=$SITE_ID --auth=$NETLIFY_TOKEN 
   server-netlify-deploy:
     docker:
       - image: circleci/node:dubnium-browsers
