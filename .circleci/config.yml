@@ -28,6 +28,16 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependencies-
       - run: yarn build
+  server-netlify-deploy:
+    docker:
+      - image: circleci/node:dubnium-browsers
+    working_directory: ~/deploy-doc-server
+    steps:
+      - attach_workspace:
+          at: /tmp 
+      - run:
+          name: Deploy app
+          command:  npx netlify-cli deploy --prod --site=$SITE_ID --auth=$NETLIFY_TOKEN --dir=$SERVER_SRC
 workflows:
   version: 2
   build-and-test:
