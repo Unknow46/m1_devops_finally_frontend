@@ -31,7 +31,7 @@ jobs:
   server-netlify-deploy:
     docker:
       - image: circleci/node:dubnium-browsers
-    working_directory: ~/repo
+    working_directory: ~/repo/src
     steps:
       - attach_workspace:
           at: /tmp 
