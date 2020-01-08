@@ -28,6 +28,10 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependencies-
       - run: yarn build
+      - run:
+          name: Copy build artifacts to workspace
+          command: |
+          cp ./ /tmp/server-build -r
       - store_artifacts:
           path: /tmp/server-build
       - persist_to_workspace:
