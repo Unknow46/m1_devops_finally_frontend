@@ -79,4 +79,5 @@ workflows:
           requires:
             - build
       - docker-build-and-push:
+          requires:
             - build
