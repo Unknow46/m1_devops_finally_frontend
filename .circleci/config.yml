@@ -45,5 +45,5 @@ workflows:
       - build:
           requires:
             - install
-      -server-netlify-deploy:
+      - server-netlify-deploy:
             - build
