@@ -29,7 +29,7 @@ jobs:
             - dependencies-
       - run: yarn build
       - persist_to_workspace:
-          root: /tmp/dir
+          root: /tmp
           paths:
             - public
   server-netlify-deploy:
@@ -38,10 +38,10 @@ jobs:
     working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ./
+          at: /tmp
       - run:
           name: Deploy app
-          command: npx netlify-cli deploy --prod --site=$SITE_ID --auth=$NETLIFY_TOKEN --dir=/tmp/dir/public
+          command: npx netlify-cli deploy --prod --site=$SITE_ID --auth=$NETLIFY_TOKEN --dir=/tmp/public
 workflows:
   version: 2
   build-and-test:
