@@ -28,20 +28,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - dependencies-
       - run: yarn build
-      - persist_to_workspace:
-          root: /
-          paths:
-            - public
-  server-netlify-deploy:
-    docker:
-      - image: circleci/node:dubnium-browsers
-    working_directory: ~/repo
-    steps:
-      - attach_workspace:
-          at: /
-      - run:
-          name: Deploy app
-          command: npx netlify-cli deploy --prod --site=$SITE_ID --auth=$NETLIFY_TOKEN --dir=public
+      - run: npx netlify-cli deploy --prod --site=$SITE_ID --auth=$NETLIFY_TOKEN 
 workflows:
   version: 2
   build-and-test:
@@ -50,6 +37,3 @@ workflows:
       - build:
           requires:
             - install
-      - server-netlify-deploy:
-          requires:
-            - build
